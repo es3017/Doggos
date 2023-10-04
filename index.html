@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal Information</title>
+</head>
+<body>
+    <h1>List of Pets</h1>
+    <ol>
+        <li>Stella</li>
+        <li>Cody</li>
+        <li>Mango</li>
+        <li>Lucy</li>
+        <li>Buhmie</li>
+    </ol>
+
+    <p>
+        <label for="petNum">Pet Number:</label>
+        <input type="text" id="petNum" name="petNum" maxlength="4" size="4">
+        <button onclick="showInfo()">Click for information!</button>
+    </p>
+
+    <p class="selectedPetInfo"></p>
+    <img src="" alt="Selected Pet" id="selectedPetImage">
+
+    <script>
+        const petsData = [
+            {
+                petName: "Stella",
+                age: 7,
+                weightInKilos: 24,
+                breed: "Dalmation",
+                imageSrc: "stella.jpg"
+            },
+            {
+                petName: "Cody",
+                age: 8,
+                weightInKilos: 22,
+                breed: "Corgi",
+                imageSrc: "cody.jpg"
+            },
+            {
+                petName: "Mango",
+                age: 2,
+                weightInKilos: 11,
+                breed: "Persian",
+                imageSrc: "mango.jpg"
+            },
+            {
+                petName: "Lucy",
+                age: 4,
+                weightInKilos: 35,
+                breed: "Ball Python",
+                imageSrc: "lucy.jpg"
+            },
+            {
+                petName: "Buhmie",
+                age: 1,
+                weightInKilos: 28,
+                breed: "Bull-dog",
+                imageSrc: "buhmie.jpg"
+            }
+        ];
+
+        function showInfo() {
+            const inputElement = document.getElementById("petNum");
+            const selectedPetInfo = document.querySelector(".selectedPetInfo");
+            const selectedPetImage = document.getElementById("selectedPetImage");
+
+            const petNumber = parseInt(inputElement.value);
+
+            if (!isNaN(petNumber) && petNumber >= 1 && petNumber <= petsData.length) {
+                const selectedPet = petsData[petNumber - 1];
+                const petInfo = `${selectedPet.petName} the ${selectedPet.breed} is ${selectedPet.age} years old. This pet weighs ${selectedPet.weightInKilos} kilos and is a ${selectedPet.breed} breed.`;
+                selectedPetInfo.textContent = petInfo;
+
+                selectedPetImage.src = selectedPet.imageSrc;
+                selectedPetImage.style.display = "block";
+
+                console.log(petInfo);
+            } else {
+                selectedPetInfo.textContent = "Invalid input. Please enter a number between 1 and " + petsData.length;
+
+                selectedPetImage.style.display = "none";
+
+                console.error("Invalid input. Please enter a valid pet number.");
+            }
+        }
+    </script>
+</body>
+</html>
